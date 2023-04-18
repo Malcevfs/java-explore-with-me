@@ -4,15 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.practicum.Stat;
 import ru.practicum.HitDto;
 import ru.practicum.HitOutputDto;
-import ru.practicum.model.App;
-import ru.practicum.repository.AppRepository;
-import ru.practicum.repository.StatsRepository;
-import ru.practicum.mapper.AppMapper;
-import ru.practicum.mapper.HitMapper;
+import ru.practicum.Stat;
 import ru.practicum.exception.PeriodException;
+import ru.practicum.mapper.HitMapper;
+import ru.practicum.repository.StatsRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -21,14 +18,11 @@ import java.util.List;
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 @Transactional
 public class StatsService {
-    private final AppRepository appRepository;
     private final StatsRepository statsRepository;
 
     public HitOutputDto saveHit(HitDto hitDto) {
-        App app = appRepository.findByName(hitDto.getApp())
-                .orElseGet(() -> appRepository.save(AppMapper.toApp(hitDto)));
 
-        return HitMapper.toOutputDto(statsRepository.save(HitMapper.toHit(hitDto, app)));
+        return HitMapper.toOutputDto(statsRepository.save(HitMapper.toHit(hitDto)));
     }
 
     public List<Stat> getHits(LocalDateTime start, LocalDateTime end, List<String> uris, boolean unique) {
@@ -36,7 +30,7 @@ public class StatsService {
             throw new PeriodException("Дата окончания поиска не может быть раньше начала.");
         }
 
-        if (uris.stream().anyMatch(uri -> uri.equals("/events")) || uris.isEmpty()) {
+        if (uris.isEmpty()) {
             if (unique) {
                 return statsRepository.getStatForUniqueIpWhithoutUri(start, end);
             } else {
