@@ -10,5 +10,5 @@ import lombok.Setter;
 public class Stat {
     private final String app;
     private final String uri;
-    private final Integer hits;
+    private final long hits;
 }
