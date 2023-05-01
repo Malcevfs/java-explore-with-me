@@ -27,7 +27,7 @@ import java.util.Optional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class EventService{
+public class EventService {
 
     private final EventRepository eventRepository;
     private final LocationRepository locationRepository;

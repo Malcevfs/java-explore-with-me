@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotBlank;
 import java.sql.Timestamp;
 
+import static ru.practicum.util.Constants.DATE_TIME;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -21,7 +23,7 @@ public class EndpointHitRequestDto {
     private String uri;
     @NotBlank
     private String ip;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = DATE_TIME)
     private Timestamp timestamp;
 
 }
