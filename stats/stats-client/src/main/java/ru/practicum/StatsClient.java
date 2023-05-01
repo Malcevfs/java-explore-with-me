@@ -1,43 +1,38 @@
 package ru.practicum;
 
-import kong.unirest.GenericType;
-import kong.unirest.Unirest;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.DefaultUriBuilderFactory;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import java.sql.Timestamp;
+import java.time.Instant;
 
 @Service
-@RequiredArgsConstructor
-@Slf4j
-public class StatsClient {
-    private final String localUri = "http://localhost:9090";
+public class StatsClient extends BaseClient {
+    private static final String APPLICATION_NAME = "ewm-main-service";
 
-    public void save(HitDto hitDto) {
-        Unirest.post(localUri + "/hit").body(hitDto);
-        log.info("Cохранение запроса c ip = {}, url = {}", hitDto.getIp(), hitDto.getUri());
+    @Autowired
+    public StatsClient(@Value("${stats-server.url}") String serverUrl, RestTemplateBuilder builder) {
+        super(
+                builder
+                        .uriTemplateHandler(new DefaultUriBuilderFactory(serverUrl))
+                        .requestFactory(HttpComponentsClientHttpRequestFactory::new)
+                        .build()
+        );
     }
 
-    public List<Stat> get(LocalDateTime start, LocalDateTime end, List<String> uris, boolean unique) {
-        log.info("Запрос статистики uris = {}", uris);
-
-        return Unirest.get(localUri + "/stats")
-                .queryString("start", urlTimeEncode(start))
-                .queryString("end", urlTimeEncode(end))
-                .queryString("uris", uris)
-                .queryString("unique", unique)
-                .asObject(new GenericType<List<Stat>>() {
-                })
-                .getBody();
+    public void createHit(HttpServletRequest request) {
+        final EndpointHitRequestDto hit = EndpointHitRequestDto.builder()
+                .app(APPLICATION_NAME)
+                .uri(request.getRequestURI())
+                .ip(request.getRemoteAddr())
+                .timestamp(Timestamp.from(Instant.now()))
+                .build();
+        post("/hit", hit);
     }
 
-    private String urlTimeEncode(LocalDateTime time) {
-        String timeString = time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        return URLEncoder.encode(timeString, StandardCharsets.UTF_8);
-    }
 }
