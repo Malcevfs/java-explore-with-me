@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class EventService {
 
@@ -111,6 +110,7 @@ public class EventService {
                 () -> new NotFoundException("Не найден Event с id =" + eventId));
     }
 
+    @Transactional
     public Event update(long userId, long eventId, Event donor) {
         Event recipient = getUserEventById(eventId, userId);
         if (recipient.getState() == State.PUBLISHED) {
@@ -120,7 +120,7 @@ public class EventService {
 
         return save(recipient);
     }
-
+    @Transactional
     public Event updateByAdmin(long eventId, Event donor) {
         Event recipient = getById(eventId);
         if (!recipient.getState().equals(State.PENDING)) throw new AccessException("Event not pending");
@@ -129,12 +129,12 @@ public class EventService {
         return save(recipient);
     }
 
-    //по тестам если ивент не найден для запроса возвращаться 409, а не 404
     public Optional<Event> getByIdForRequest(long eventId) {
         return eventRepository.findById(eventId);
     }
 
-    private Event updateEvent(Event donor, Event recipient) {
+    @Transactional
+    public Event updateEvent(Event donor, Event recipient) {
         if (donor.getLocation() != null) {
             Location location = getLocation(donor.getLocation());
             donor.setLocation(location);

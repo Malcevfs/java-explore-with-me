@@ -24,8 +24,8 @@ public class PublicCompilationController {
     @GetMapping
     public Collection<CompilationDto> getAll(
             @RequestParam(required = false) boolean pinned,
-            @PositiveOrZero @RequestParam(defaultValue = "0", required = false) @Min(0) int from,
-            @Positive @RequestParam(defaultValue = "10", required = false) @Min(1) int size) {
+            @PositiveOrZero @RequestParam(defaultValue = "0") @Min(0) int from,
+            @Positive @RequestParam(defaultValue = "10") @Min(1) int size) {
         return CompilationMapper.toCompilationDtoCollection(
                 compilationService.getAll(pinned, from, size));
     }

@@ -1,12 +1,14 @@
 package ru.practicum.category.mapper;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import ru.practicum.category.model.Category;
 import ru.practicum.category.dto.CategoryResponseDto;
 import ru.practicum.category.dto.CategoryDto;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
-
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CategoryMapper {
 
     public static Category toCategory(CategoryDto dto) {

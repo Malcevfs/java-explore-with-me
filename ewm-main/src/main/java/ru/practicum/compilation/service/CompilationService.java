@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class CompilationService {
 
@@ -38,14 +37,13 @@ public class CompilationService {
         return compilationRepository.save(compilation);
     }
 
-
+    @Transactional
     public Compilation update(long compId, Compilation compilation) {
         Compilation recipient = getById(compId);
         return compilationRepository.save(CompilationMapper.update(recipient, compilation));
     }
-
+    @Transactional
     public void delete(long compId) {
-        getById(compId);
         compilationRepository.deleteById(compId);
     }
 

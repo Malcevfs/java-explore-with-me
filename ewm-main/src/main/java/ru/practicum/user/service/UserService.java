@@ -12,7 +12,6 @@ import java.util.Collection;
 import java.util.List;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class UserService {
 
@@ -29,7 +28,7 @@ public class UserService {
     public User getById(long userId) {
         return userRepository.findById(userId).orElseThrow(() -> new NotFoundException("User with id=" + userId));
     }
-
+    @Transactional
     public void deleteById(long userId) {
         getById(userId);
         userRepository.deleteById(userId);

@@ -8,6 +8,6 @@ import java.util.Set;
 @Data
 public class EventRequestStatusUpdateRequest {
 
-    Set<Long> requestIds;
-    Status status;
+   private Set<Long> requestIds;
+   private Status status;
 }
