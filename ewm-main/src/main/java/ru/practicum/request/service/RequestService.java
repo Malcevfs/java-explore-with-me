@@ -23,7 +23,6 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class RequestService {
 
@@ -68,7 +67,7 @@ public class RequestService {
         return requestRepository.findAllByEventId(eventId);
     }
 
-
+    @Transactional
     public EventRequestStatusUpdateResult updateStatus(long userId, long eventId,
                                                        EventRequestStatusUpdateRequest requestStatusUpdate) {
         userService.getById(userId);

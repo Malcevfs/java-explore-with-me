@@ -11,7 +11,6 @@ import ru.practicum.exception.NotFoundException;
 import java.util.Collection;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class CategoryService {
 
