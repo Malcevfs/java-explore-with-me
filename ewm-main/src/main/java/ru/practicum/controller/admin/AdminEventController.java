@@ -37,8 +37,8 @@ public class AdminEventController {
             @RequestParam(required = false) List<Long> categories,
             @RequestParam(required = false) Timestamp rangeStart,
             @RequestParam(required = false) Timestamp rangeEnd,
-            @RequestParam(defaultValue = "0", required = false) @Min(0) final int from,
-            @RequestParam(defaultValue = "10", required = false) @Min(1) final int size) {
+            @RequestParam(defaultValue = "0") @Min(0) final int from,
+            @RequestParam(defaultValue = "10") @Min(1) final int size) {
 
         return EventMapper.toEventFullDtoCollection(eventService.getAllByParameters(users, states, categories,
                 rangeStart, rangeEnd, from, size));

@@ -1,5 +1,7 @@
 package ru.practicum.request.mapper;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import ru.practicum.event.dto.EventRequestStatusUpdateResult;
 import ru.practicum.request.dto.EventRequestStatusUpdateResultDto;
 import ru.practicum.request.dto.ParticipationRequestDto;
@@ -8,6 +10,7 @@ import ru.practicum.request.model.Request;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class RequestMapper {
 
     public static ParticipationRequestDto toParticipationRequestDto(Request request) {

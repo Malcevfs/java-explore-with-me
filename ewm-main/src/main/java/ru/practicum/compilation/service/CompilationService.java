@@ -45,6 +45,7 @@ public class CompilationService {
 
     @Transactional
     public void delete(long compId) {
+        getById(compId);
         compilationRepository.deleteById(compId);
     }
 
