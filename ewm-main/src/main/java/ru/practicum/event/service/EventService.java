@@ -120,6 +120,7 @@ public class EventService {
 
         return save(recipient);
     }
+
     @Transactional
     public Event updateByAdmin(long eventId, Event donor) {
         Event recipient = getById(eventId);

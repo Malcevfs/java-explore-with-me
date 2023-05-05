@@ -42,6 +42,7 @@ public class CompilationService {
         Compilation recipient = getById(compId);
         return compilationRepository.save(CompilationMapper.update(recipient, compilation));
     }
+
     @Transactional
     public void delete(long compId) {
         compilationRepository.deleteById(compId);

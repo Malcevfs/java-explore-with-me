@@ -28,6 +28,7 @@ public class UserService {
     public User getById(long userId) {
         return userRepository.findById(userId).orElseThrow(() -> new NotFoundException("User with id=" + userId));
     }
+
     @Transactional
     public void deleteById(long userId) {
         getById(userId);

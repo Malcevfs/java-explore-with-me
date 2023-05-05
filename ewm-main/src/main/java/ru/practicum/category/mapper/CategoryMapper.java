@@ -8,6 +8,7 @@ import ru.practicum.category.dto.CategoryDto;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
+
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CategoryMapper {
 
