@@ -15,6 +15,8 @@ import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static ru.practicum.util.Constants.DATE_TIME;
+
 @RestController
 @RequestMapping
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
@@ -30,9 +32,9 @@ public class StatsController {
 
     @GetMapping("/stats")
     public List<Stat> get(@RequestParam(name = "start")
-                          @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime start,
+                          @DateTimeFormat(pattern = DATE_TIME) LocalDateTime start,
                           @RequestParam(name = "end")
-                          @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime end,
+                          @DateTimeFormat(pattern = DATE_TIME) LocalDateTime end,
                           @RequestParam(name = "uris", defaultValue = "") List<String> uris,
                           @RequestParam(name = "unique", defaultValue = "false") boolean unique) {
         return statsService.getHits(start, end, uris, unique);
