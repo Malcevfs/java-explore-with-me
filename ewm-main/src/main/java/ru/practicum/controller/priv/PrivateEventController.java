@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.event.service.EventService;
+import ru.practicum.rates.model.Rate;
+import ru.practicum.rates.service.RateService;
 import ru.practicum.request.dto.EventRequestStatusUpdateResultDto;
 import ru.practicum.request.dto.ParticipationRequestDto;
 import ru.practicum.event.dto.*;
@@ -26,6 +28,7 @@ public class PrivateEventController {
 
     private final EventService eventService;
     private final RequestService requestService;
+    private final RateService rateService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -82,6 +85,23 @@ public class PrivateEventController {
             @PathVariable @Min(0) long eventId) {
         return RequestMapper.toParticipationRequestDtoCollection(
                 requestService.getEventRequests(userId, eventId));
+    }
+
+    @PostMapping("/{eventId}/rate")
+    public Rate setRateOnEvent(@PathVariable @Min(0) long userId,
+                               @PathVariable @Min(0) long eventId,
+                               @RequestParam(defaultValue = "false") boolean like,
+                               @RequestParam(defaultValue = "false") boolean dislike) {
+        log.info("Оценка события пользователем userId={}, eventId={}", userId, eventId);
+        return rateService.setRate(userId, eventId, like, dislike);
+    }
+
+    @DeleteMapping("/{eventId}/rate")
+    public HttpStatus deleteRateOnEvent (@PathVariable @Min(0) long userId,
+                                         @PathVariable @Min(0) long eventId){
+        log.info("Удаление оценки для события пользователем userId={}, eventId={}", userId, eventId);
+        rateService.deleteRate(userId, eventId);
+        return HttpStatus.OK;
     }
 
 }

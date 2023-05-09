@@ -49,6 +49,8 @@ CREATE TABLE IF NOT EXISTS events
     state              VARCHAR(20)                            NOT NULL,
     title              VARCHAR(120)                            NOT NULL,
     views              BIGINT                                  NOT NULL,
+--     likes              BIGINT                                  NOT NULL, /* - */
+--     dislikes           BIGINT                                  NOT NULL, /* - */
     CONSTRAINT pk_events PRIMARY KEY (id),
     CONSTRAINT FK_EVENTS_ON_CATEGORY FOREIGN KEY (category_id) REFERENCES public.categories (id),
     CONSTRAINT FK_EVENTS_ON_INITIATOR FOREIGN KEY (initiator_id) REFERENCES public.users (id),
@@ -83,4 +85,14 @@ CREATE TABLE compilation_events
     CONSTRAINT pk_compilation_events PRIMARY KEY (compilation_id, event_id),
     CONSTRAINT fk_comeve_on_compilation FOREIGN KEY (compilation_id) REFERENCES compilations (id),
     CONSTRAINT fk_comeve_on_event FOREIGN KEY (event_id) REFERENCES events (id)
+);
+
+CREATE TABLE IF NOT EXISTS rate(
+    event_id BIGINT  NOT NULL,
+    user_id  BIGINT  NOT NULL,
+    likes    BOOLEAN NOT NULL,
+    dislikes BOOLEAN NOT NULL,
+    FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+
 );
