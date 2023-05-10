@@ -41,11 +41,11 @@ public class RateService {
                 rateRepository.save(rate);
             }
         } else {
-            rate = rateRepository.save(Rate.builder().
-                    userId(userId).
-                    eventId(eventId).
-                    likes(like).
-                    dislikes(dislike).build());
+            rate = rateRepository.save(Rate.builder()
+                    .userId(userId)
+                    .eventId(eventId)
+                    .likes(like)
+                    .dislikes(dislike).build());
             if (like) {
                 eventRepository.incrementLikesById(eventId);
             }
