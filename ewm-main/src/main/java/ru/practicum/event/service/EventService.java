@@ -45,6 +45,8 @@ public class EventService {
         event.setPublishedOn(Timestamp.valueOf(LocalDateTime.now()));
         event.setState(State.PENDING);
         event.setViews(0);
+        event.setLikes(0);
+        event.setDislikes(0);
 
         return save(event);
     }

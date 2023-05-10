@@ -5,5 +5,6 @@ import ru.practicum.rates.model.Rate;
 
 public interface RateRepository extends JpaRepository<Rate, Long> {
 
-    public void deleteByEventIdAndUserId(long eventId, long userId);
+    Rate findByUserIdAndEventId(long userId,long eventId);
+    void deleteByEventIdAndUserId(long eventId, long userId);
 }

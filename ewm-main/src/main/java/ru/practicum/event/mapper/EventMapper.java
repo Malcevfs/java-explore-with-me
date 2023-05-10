@@ -99,6 +99,8 @@ public class EventMapper {
                 .state(event.getState().toString())
                 .title(event.getTitle())
                 .views(event.getViews().intValue())
+                .likes(event.getLikes().intValue())
+                .dislikes(event.getDislikes().intValue())
                 .build();
     }
 

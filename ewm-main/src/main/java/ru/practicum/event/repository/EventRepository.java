@@ -2,6 +2,7 @@ package ru.practicum.event.repository;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import ru.practicum.event.model.Event;
 import ru.practicum.util.State;
@@ -59,4 +60,20 @@ public interface EventRepository extends JpaRepository<Event, Long> {
                                                              Timestamp rangeEnd,
                                                              Boolean onlyAvailable,
                                                              PageRequest pageRequest);
+
+    @Modifying
+    @Query("UPDATE Event e SET e.likes = e.likes + 1 WHERE e.id = :eventId")
+    void incrementLikesById(Long eventId);
+
+    @Modifying
+    @Query("UPDATE Event e SET e.likes = e.likes - 1 WHERE e.id = :eventId")
+    void removeLikesById(Long eventId);
+
+    @Modifying
+    @Query("UPDATE Event e SET e.dislikes = e.dislikes + 1 WHERE e.id = :eventId")
+    void incrementDislikesById(Long eventId);
+
+    @Modifying
+    @Query("UPDATE Event e SET e.dislikes = e.dislikes - 1 WHERE e.id = :eventId")
+    void removeDislikesById(Long eventId);
 }

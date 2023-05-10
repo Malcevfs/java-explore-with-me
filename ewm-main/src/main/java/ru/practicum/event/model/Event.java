@@ -57,5 +57,6 @@ public class Event {
     private String title;
     @Column(nullable = false)
     private Integer views;
-
+    private Integer likes;
+    private Integer dislikes;
 }

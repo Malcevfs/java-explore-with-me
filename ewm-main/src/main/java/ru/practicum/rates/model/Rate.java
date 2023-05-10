@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "rate")
@@ -18,10 +15,12 @@ import javax.persistence.Table;
 @AllArgsConstructor
 public class Rate {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     @Column(name = "event_id")
     private long eventId;
     @Column(name = "user_id")
     private long userId;
-    private boolean likes;
-    private boolean dislikes;
+    private Boolean likes;
+    private Boolean dislikes;
 }
