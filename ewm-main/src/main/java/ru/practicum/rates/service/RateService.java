@@ -20,11 +20,11 @@ public class RateService {
         if (rate != null) {
             if (rate.getLikes() && like) {
                 eventRepository.removeLikesById(eventId);
-                rateRepository.deleteByEventIdAndUserId(eventId,userId);
+                rateRepository.deleteByEventIdAndUserId(eventId, userId);
             }
             if (rate.getDislikes() && dislike) {
                 eventRepository.removeDislikesById(eventId);
-                rateRepository.deleteByEventIdAndUserId(eventId,userId);
+                rateRepository.deleteByEventIdAndUserId(eventId, userId);
             }
             if (rate.getLikes() && dislike) {
                 rate.setDislikes(true);
@@ -33,16 +33,15 @@ public class RateService {
                 eventRepository.incrementDislikesById(eventId);
                 rateRepository.save(rate);
             }
-            if (rate.getDislikes() && like){
+            if (rate.getDislikes() && like) {
                 rate.setDislikes(false);
                 rate.setLikes(true);
                 eventRepository.removeDislikesById(eventId);
                 eventRepository.incrementLikesById(eventId);
                 rateRepository.save(rate);
-
             }
         } else {
-          rate = rateRepository.save(Rate.builder().
+            rate = rateRepository.save(Rate.builder().
                     userId(userId).
                     eventId(eventId).
                     likes(like).
@@ -54,13 +53,7 @@ public class RateService {
                 eventRepository.incrementDislikesById(eventId);
             }
         }
-
         return rate;
-    }
-
-    @Transactional
-    public void deleteRate(long userId, long eventId) {
-        rateRepository.deleteByEventIdAndUserId(eventId, userId);
     }
 
 }

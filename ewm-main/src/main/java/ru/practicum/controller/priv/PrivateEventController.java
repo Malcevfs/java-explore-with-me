@@ -5,13 +5,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.practicum.event.dto.*;
+import ru.practicum.event.mapper.EventMapper;
 import ru.practicum.event.service.EventService;
 import ru.practicum.rates.model.Rate;
 import ru.practicum.rates.service.RateService;
 import ru.practicum.request.dto.EventRequestStatusUpdateResultDto;
 import ru.practicum.request.dto.ParticipationRequestDto;
-import ru.practicum.event.dto.*;
-import ru.practicum.event.mapper.EventMapper;
 import ru.practicum.request.mapper.RequestMapper;
 import ru.practicum.request.service.RequestService;
 
@@ -95,13 +95,4 @@ public class PrivateEventController {
         log.info("Оценка события пользователем userId={}, eventId={}", userId, eventId);
         return rateService.setRate(userId, eventId, like, dislike);
     }
-
-    @DeleteMapping("/{eventId}/rate")
-    public HttpStatus deleteRateOnEvent (@PathVariable @Min(0) long userId,
-                                         @PathVariable @Min(0) long eventId){
-        log.info("Удаление оценки для события пользователем userId={}, eventId={}", userId, eventId);
-        rateService.deleteRate(userId, eventId);
-        return HttpStatus.OK;
-    }
-
 }

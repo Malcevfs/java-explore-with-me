@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS rate(
     likes    BOOLEAN NOT NULL,
     dislikes BOOLEAN NOT NULL,
     CONSTRAINT pk_rate PRIMARY KEY (id),
-    FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE CASCADE,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    FOREIGN KEY (event_id) REFERENCES events(id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
 
 );
