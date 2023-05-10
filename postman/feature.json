@@ -7,237 +7,6 @@
 	},
 	"item": [
 		{
-			"name": "Добавление пользователя 1",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 201 or 200\", function () {",
-							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
-							"});",
-							"pm.test(\"Has user create response\", function () {",
-							"    pm.response.to.be.withBody;",
-							"    pm.response.to.be.json;",
-							"});",
-							"pm.test(\"Test user1 'id' field\", function () {",
-							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData).to.have.property('id');",
-							"    pm.expect(jsonData.id, '\"id\" must be 1').to.eql(1);",
-							"});",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "Accept",
-						"value": "*/*",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"name\": \"test user\",\n  \"email\": \"test@mail.ru\"\n}"
-				},
-				"url": {
-					"raw": "{{baseUrl}}/admin/users",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"admin",
-						"users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Добавление пользователя 2",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 201 or 200\", function () {",
-							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
-							"});",
-							"pm.test(\"Has user create response\", function () {",
-							"    pm.response.to.be.withBody;",
-							"    pm.response.to.be.json;",
-							"});",
-							"pm.test(\"Test user1 'id' field\", function () {",
-							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData).to.have.property('id');",
-							"    pm.expect(jsonData.id, '\"id\" must be 1').to.eql(2);",
-							"});",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "Accept",
-						"value": "*/*",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"name\": \"test user2\",\n  \"email\": \"test2@mail.ru\"\n}"
-				},
-				"url": {
-					"raw": "{{baseUrl}}/admin/users",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"admin",
-						"users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Добавление катиегории 1",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 201 or 200\", function () {",
-							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
-							"});",
-							"pm.test(\"Has user create response\", function () {",
-							"    pm.response.to.be.withBody;",
-							"    pm.response.to.be.json;",
-							"});",
-							"pm.test(\"Test category 'id' field\", function () {",
-							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData).to.have.property('id');",
-							"    pm.expect(jsonData.id, '\"id\" must be 1').to.eql(1);",
-							"});",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "Accept",
-						"value": "*/*",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"name\": \"test category\"\n}"
-				},
-				"url": {
-					"raw": "{{baseUrl}}/admin/categories",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"admin",
-						"categories"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Добавление события",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 201 or 200\", function () {",
-							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
-							"});",
-							"pm.test(\"Has user create response\", function () {",
-							"    pm.response.to.be.withBody;",
-							"    pm.response.to.be.json;",
-							"});",
-							"pm.test(\"Test Event 'id' field\", function () {",
-							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData).to.have.property('id');",
-							"    pm.expect(jsonData.id, '\"id\" must be 1').to.eql(1);",
-							"});",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "Accept",
-						"value": "*/*",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"annotation\": \"Сплав на байдарках похож на полет.\",\n  \"category\": 1,\n  \"description\": \"Сплав на байдарках похож на полет. На спокойной воде — это парение. На бурной, порожистой — выполнение фигур высшего пилотажа. И то, и другое дарят чувство обновления, феерические эмоции, яркие впечатления.\",\n  \"eventDate\": \"2024-12-31 15:10:05\",\n  \"location\": {\n    \"lat\": 55.754167,\n    \"lon\": 37.62\n  },\n  \"paid\": true,\n  \"participantLimit\": 10,\n  \"requestModeration\": false,\n  \"title\": \"Сплав на байдарках\"\n}"
-				},
-				"url": {
-					"raw": "{{baseUrl}}/users/:userId/events",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"users",
-						":userId",
-						"events"
-					],
-					"variable": [
-						{
-							"key": "userId",
-							"value": "1"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Запрос события оценок нет",
 			"event": [
 				{
@@ -306,7 +75,7 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "1"
+							"value": "3"
 						},
 						{
 							"key": "eventId",
@@ -344,7 +113,7 @@
 							"pm.test(\"Test likes 'userId' field\", function () {",
 							"    var jsonData = pm.response.json();",
 							"    pm.expect(jsonData).to.have.property('userId');",
-							"    pm.expect(jsonData.userId, '\"userId\" must be 1').to.eql(1);",
+							"    pm.expect(jsonData.userId, '\"userId\" must be 3').to.eql(3);",
 							"});",
 							"pm.test(\"Test likes 'likes' field\", function () {",
 							"    var jsonData = pm.response.json();",
@@ -405,7 +174,7 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "1"
+							"value": "3"
 						},
 						{
 							"key": "eventId",
@@ -485,7 +254,7 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "1"
+							"value": "3"
 						},
 						{
 							"key": "eventId",
@@ -523,7 +292,7 @@
 							"pm.test(\"Test likes 'userId' field\", function () {",
 							"    var jsonData = pm.response.json();",
 							"    pm.expect(jsonData).to.have.property('userId');",
-							"    pm.expect(jsonData.userId, '\"userId\" must be 1').to.eql(1);",
+							"    pm.expect(jsonData.userId, '\"userId\" must be 3').to.eql(3);",
 							"});",
 							"pm.test(\"Test likes 'likes' field\", function () {",
 							"    var jsonData = pm.response.json();",
@@ -584,7 +353,7 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "1"
+							"value": "3"
 						},
 						{
 							"key": "eventId",
@@ -664,7 +433,7 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "1"
+							"value": "3"
 						},
 						{
 							"key": "eventId",
@@ -702,7 +471,7 @@
 							"pm.test(\"Test likes 'userId' field\", function () {",
 							"    var jsonData = pm.response.json();",
 							"    pm.expect(jsonData).to.have.property('userId');",
-							"    pm.expect(jsonData.userId, '\"userId\" must be 1').to.eql(1);",
+							"    pm.expect(jsonData.userId, '\"userId\" must be 3').to.eql(3);",
 							"});",
 							"pm.test(\"Test likes 'likes' field\", function () {",
 							"    var jsonData = pm.response.json();",
@@ -763,7 +532,7 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "1"
+							"value": "3"
 						},
 						{
 							"key": "eventId",
@@ -843,7 +612,7 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "1"
+							"value": "3"
 						},
 						{
 							"key": "eventId",
@@ -881,7 +650,7 @@
 							"pm.test(\"Test likes 'userId' field\", function () {",
 							"    var jsonData = pm.response.json();",
 							"    pm.expect(jsonData).to.have.property('userId');",
-							"    pm.expect(jsonData.userId, '\"userId\" must be 1').to.eql(1);",
+							"    pm.expect(jsonData.userId, '\"userId\" must be 3').to.eql(3);",
 							"});",
 							"pm.test(\"Test likes 'likes' field\", function () {",
 							"    var jsonData = pm.response.json();",
@@ -942,7 +711,7 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "1"
+							"value": "3"
 						},
 						{
 							"key": "eventId",
@@ -1022,7 +791,7 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "1"
+							"value": "3"
 						},
 						{
 							"key": "eventId",
@@ -1060,7 +829,7 @@
 							"pm.test(\"Test likes 'userId' field\", function () {",
 							"    var jsonData = pm.response.json();",
 							"    pm.expect(jsonData).to.have.property('userId');",
-							"    pm.expect(jsonData.userId, '\"userId\" must be 1').to.eql(1);",
+							"    pm.expect(jsonData.userId, '\"userId\" must be 3').to.eql(3);",
 							"});",
 							"pm.test(\"Test likes 'likes' field\", function () {",
 							"    var jsonData = pm.response.json();",
@@ -1121,7 +890,7 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "1"
+							"value": "3"
 						},
 						{
 							"key": "eventId",
@@ -1201,7 +970,7 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "1"
+							"value": "3"
 						},
 						{
 							"key": "eventId",
@@ -1239,7 +1008,7 @@
 							"pm.test(\"Test likes 'userId' field\", function () {",
 							"    var jsonData = pm.response.json();",
 							"    pm.expect(jsonData).to.have.property('userId');",
-							"    pm.expect(jsonData.userId, '\"userId\" must be 1').to.eql(1);",
+							"    pm.expect(jsonData.userId, '\"userId\" must be 3').to.eql(3);",
 							"});",
 							"pm.test(\"Test likes 'likes' field\", function () {",
 							"    var jsonData = pm.response.json();",
@@ -1300,7 +1069,7 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "1"
+							"value": "3"
 						},
 						{
 							"key": "eventId",
@@ -1380,7 +1149,7 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "1"
+							"value": "3"
 						},
 						{
 							"key": "eventId",
@@ -1559,7 +1328,7 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "1"
+							"value": "3"
 						},
 						{
 							"key": "eventId",
