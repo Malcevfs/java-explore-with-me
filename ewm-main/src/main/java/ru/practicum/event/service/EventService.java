@@ -5,17 +5,17 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.category.model.Category;
-import ru.practicum.location.model.Location;
+import ru.practicum.category.service.CategoryService;
+import ru.practicum.event.mapper.EventMapper;
 import ru.practicum.event.model.Event;
-import ru.practicum.user.service.UserService;
-import ru.practicum.util.SortEvent;
+import ru.practicum.event.repository.EventRepository;
 import ru.practicum.exception.AccessException;
 import ru.practicum.exception.NotFoundException;
-import ru.practicum.event.mapper.EventMapper;
-import ru.practicum.event.repository.EventRepository;
+import ru.practicum.location.model.Location;
 import ru.practicum.location.repository.LocationRepository;
-import ru.practicum.category.service.CategoryService;
 import ru.practicum.user.model.User;
+import ru.practicum.user.service.UserService;
+import ru.practicum.util.SortEvent;
 import ru.practicum.util.State;
 
 import java.sql.Timestamp;
@@ -47,6 +47,7 @@ public class EventService {
         event.setViews(0);
         event.setLikes(0);
         event.setDislikes(0);
+        event.setRate(0.0F);
 
         return save(event);
     }
@@ -75,12 +76,35 @@ public class EventService {
 
     public Collection<Event> getAllByParametersPublic(String text, List<Long> categories, Boolean paid,
                                                       Timestamp rangeStart, Timestamp rangeEnd, Boolean onlyAvailable,
-                                                      SortEvent sort, int from, int size) {
+                                                      SortEvent sort, int from, int size, String rate) {
         if (rangeStart == null) rangeStart = Timestamp.valueOf(LocalDateTime.now());
         if (rangeEnd == null) rangeEnd = Timestamp.valueOf(LocalDateTime.now().plusYears(100));
         if (text != null) text = text.toLowerCase();
+        if (rate != null) rate = rate.toLowerCase();
 
         if (sort == null || sort.equals(SortEvent.EVENT_DATE)) {
+
+            if (rate.equals("desc")) {
+                return eventRepository.findByParametersForPublicSortEventDateRateDesc(
+                        text,
+                        categories,
+                        paid,
+                        rangeStart,
+                        rangeEnd,
+                        onlyAvailable,
+                        PageRequest.of(from, size));
+            }
+            if (rate.equals("asc")) {
+                return eventRepository.findByParametersForPublicSortEventDateRateAsc(
+                        text,
+                        categories,
+                        paid,
+                        rangeStart,
+                        rangeEnd,
+                        onlyAvailable,
+                        PageRequest.of(from, size));
+            }
+
             return eventRepository.findByParametersForPublicSortEventDate(
                     text,
                     categories,
@@ -90,6 +114,27 @@ public class EventService {
                     onlyAvailable,
                     PageRequest.of(from, size));
         } else {
+            if (rate.equals("desc")) {
+                return eventRepository.findByParametersForPublicSortViewsAndRateDesc(
+                        text,
+                        categories,
+                        paid,
+                        rangeStart,
+                        rangeEnd,
+                        onlyAvailable,
+                        PageRequest.of(from, size));
+            }
+            if (rate.equals("asc")) {
+                return eventRepository.findByParametersForPublicSortViewsAndRateAsc(
+                        text,
+                        categories,
+                        paid,
+                        rangeStart,
+                        rangeEnd,
+                        onlyAvailable,
+                        PageRequest.of(from, size));
+            }
+
             return eventRepository.findByParametersForPublicSortViews(
                     text,
                     categories,

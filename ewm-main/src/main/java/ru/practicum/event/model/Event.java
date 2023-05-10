@@ -59,4 +59,5 @@ public class Event {
     private Integer views;
     private Integer likes;
     private Integer dislikes;
+    private Float rate;
 }

@@ -101,6 +101,7 @@ public class EventMapper {
                 .views(event.getViews().intValue())
                 .likes(event.getLikes().intValue())
                 .dislikes(event.getDislikes().intValue())
+                .rate(event.getRate().floatValue())
                 .build();
     }
 
@@ -129,6 +130,7 @@ public class EventMapper {
                 .paid(event.getPaid())
                 .title(event.getTitle())
                 .views(event.getViews())
+                .rate(event.getRate())
                 .build();
     }
 

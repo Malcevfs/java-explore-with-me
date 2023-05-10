@@ -40,4 +40,5 @@ public class EventFullDto {
     private Integer views;
     private Integer likes;
     private Integer dislikes;
+    private Float rate;
 }
