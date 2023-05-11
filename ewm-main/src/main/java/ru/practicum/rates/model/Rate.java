@@ -1,4 +1,4 @@
-package ru.practicum.user.model;
+package ru.practicum.rates.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,18 +8,19 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "rate")
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class User {
+@AllArgsConstructor
+public class Rate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(nullable = false, unique = true)
-    private String name;
-    @Column(nullable = false)
-    private String email;
-    private Float rate;
+    @Column(name = "event_id")
+    private long eventId;
+    @Column(name = "user_id")
+    private long userId;
+    private Boolean likes;
+    private Boolean dislikes;
 }

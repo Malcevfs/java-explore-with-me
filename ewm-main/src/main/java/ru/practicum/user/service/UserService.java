@@ -18,6 +18,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     public User create(User user) {
+        user.setRate(0.0F);
         return userRepository.save(user);
     }
 

@@ -37,11 +37,12 @@ public class PublicEventController {
             @RequestParam(defaultValue = "false") Boolean onlyAvailable,
             @RequestParam(required = false) SortEvent sort,
             @RequestParam(defaultValue = "0") @Min(0) int from,
-            @RequestParam(defaultValue = "10") @Min(1) int size, HttpServletRequest request) {
+            @RequestParam(defaultValue = "10") @Min(1) int size, HttpServletRequest request,
+            @RequestParam(required = false) String rate) {
         statsClient.createHit(request);
         return EventMapper.toEventShortDtoCollection(
                 eventService.getAllByParametersPublic(text, categories, paid, rangeStart,
-                        rangeEnd, onlyAvailable, sort, from, size));
+                        rangeEnd, onlyAvailable, sort, from, size, rate));
     }
 
     @GetMapping("{id}")

@@ -15,4 +15,5 @@ public class UserResponseDto {
     private Long id;
     @NotBlank
     private String name;
+    private Float rate;
 }

@@ -25,6 +25,7 @@ public class UserMapper {
                 .email(user.getEmail())
                 .id(user.getId())
                 .name(user.getName())
+                .rate(user.getRate())
                 .build();
     }
 
@@ -32,6 +33,7 @@ public class UserMapper {
         return UserShortDto.builder()
                 .id(user.getId())
                 .name(user.getName())
+                .rate(user.getRate())
                 .build();
     }
 
