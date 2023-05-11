@@ -52,6 +52,7 @@ public class EventService {
         return save(event);
     }
 
+    @Transactional
     public Event save(Event event) {
         return eventRepository.save(event);
     }

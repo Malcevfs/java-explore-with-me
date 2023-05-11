@@ -61,6 +61,7 @@ public class RateService {
         return rate;
     }
 
+    @Transactional
     public void setRateForEventAndInitiator(long eventId) {
         Event event = eventRepository.findById(eventId).orElseThrow();
         float allLikes = event.getLikes();
