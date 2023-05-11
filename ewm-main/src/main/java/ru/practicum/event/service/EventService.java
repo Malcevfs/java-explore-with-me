@@ -85,7 +85,7 @@ public class EventService {
 
         if (sort == null || sort.equals(SortEvent.EVENT_DATE)) {
 
-            if (rate.equals("desc")) {
+            if (rate!= null && rate.equals("desc")) {
                 return eventRepository.findByParametersForPublicSortEventDateRateDesc(
                         text,
                         categories,
@@ -95,7 +95,7 @@ public class EventService {
                         onlyAvailable,
                         PageRequest.of(from, size));
             }
-            if (rate.equals("asc")) {
+            if (rate!= null && rate.equals("asc")) {
                 return eventRepository.findByParametersForPublicSortEventDateRateAsc(
                         text,
                         categories,
@@ -115,7 +115,7 @@ public class EventService {
                     onlyAvailable,
                     PageRequest.of(from, size));
         } else {
-            if (rate.equals("desc")) {
+            if (rate!= null && rate.equals("desc")) {
                 return eventRepository.findByParametersForPublicSortViewsAndRateDesc(
                         text,
                         categories,
@@ -125,7 +125,7 @@ public class EventService {
                         onlyAvailable,
                         PageRequest.of(from, size));
             }
-            if (rate.equals("asc")) {
+            if (rate!= null && rate.equals("asc")) {
                 return eventRepository.findByParametersForPublicSortViewsAndRateAsc(
                         text,
                         categories,
